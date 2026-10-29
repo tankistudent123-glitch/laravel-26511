@@ -1,25 +1,13 @@
-<?php
-use App\Http\Controllers\BookController;
+﻿<?php
+
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\BookController;
+use App\Http\Controllers\PageController;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// （最初からある / のルートは、そのまま残す）
 
-Route::get('/top', function () {
-    return view('top');
-});
+Route::get('/top', [PageController::class, 'top'])->name('top');
+Route::get('/about', [PageController::class, 'about'])->name('about');
 
-Route::get('/about', function () {
-    return view('about');
-});
-
-Route::get('/book', function () {
-    return view('book');
-});
-
-Route::get('/books', [BookController::class, 'index']);
-
-
-
-
+Route::get('/books', [BookController::class, 'index'])->name('books.index');
+Route::get('/books/{id}', [BookController::class, 'show'])->name('books.show');
